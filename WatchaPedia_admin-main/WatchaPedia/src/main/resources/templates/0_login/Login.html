@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/0_login/Login.css" />
+    <script defer src="/js/Login.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <section>
+        <div id="icon">
+          <a href="Login.html"
+            ><img src="/assets/img/그림1.png" alt="메인"
+          /></a>
+        </div>
+
+        <div id="bor">
+          <div id="bor2">
+            <div>
+              <p id="main">
+                <img src="/assets/img/그림2.png" alt="" />Admin Login
+              </p>
+            </div>
+            <hr />
+
+            <form
+              name="regform"
+              id="regform"
+              method="post"
+              action="/loginOk"
+            >
+              <div id="bor3">
+                <div class="te"><p>관리자 아이디</p></div>
+                <div>
+                  <input
+                    type="text"
+                    name="adminId"
+                    class="fo"
+                    id="adminId"
+                    placeholder="아이디를 입력하세요."
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='아이디를 입력하세요'"
+                  />
+                </div>
+              </div>
+              <div id="bor4">
+                <div class="te"><p>관리자 비밀번호</p></div>
+                <div>
+                  <input
+                    type="password"
+                    name="adminPw"
+                    class="fo"
+                    id="adminPw"
+                    placeholder="비밀번호를 입력하세요"
+                    onfocus="this.placeholder=''"
+                    onblur="this.placeholder='비밀번호를 입력하세요'"
+                  />
+                </div>
+              </div>
+
+              <div id="bor5">
+                <div class="te"></div>
+                <button @click="fun">관리자 로그인</button>
+              </div>
+            </form>
+          </div>
+          <p class="hidden_warning">아이디 또는 비밀번호를 잘못입력했습니다</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

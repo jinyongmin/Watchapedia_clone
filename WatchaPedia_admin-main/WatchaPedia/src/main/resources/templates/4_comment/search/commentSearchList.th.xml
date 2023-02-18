@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#comment-table" th:remove="all-but-first">
+        <attr sel=".comment-tr" th:each="comment : ${comments}" th:onclick="commentDetail(${comment.commIdx})">
+            <attr sel="td.comment-idx" th:text="${comment.commIdx}"></attr>
+            <attr sel="td.comment-username" th:text="${comment.commName}"/>
+            <attr sel="td.comment-title/a" th:text="${comment.commTitle}" th:href="@{'/comment/'+${comment.commIdx}}"/>
+            <attr sel="td.comment-content-type" th:text="${comment.commContentType}"/>
+            <attr sel="td.comment-userIdx" th:text="${#lists.size(comment.likeList)}" />
+            <attr sel="td.comment-contentidx" th:text="${#lists.size(comment.recommentList)}"/>
+            <attr sel="td.comment-regdate" th:date="${comment.commRegDate}" th:text="*{#temporals.format(comment.commRegDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+        </attr>
+    </attr>
+</thlogic>
+
+        <!--     th:href="@{'/comment/'+${comment.commIdx}}"       -->

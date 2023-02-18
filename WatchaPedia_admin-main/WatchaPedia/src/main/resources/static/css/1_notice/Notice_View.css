@@ -1,0 +1,39 @@
+#box1{
+    border:0.5px solid rgb(241, 241, 241);
+    font-size: 25px;
+    margin: 20px auto;
+}
+#box2{
+    border:0.5px solid rgb(241, 241, 241);
+    width: 500px; height: 370px;
+    padding:10px;
+    font-size: 18px;
+    margin:0 auto;
+}
+
+#btn0{
+    margin: 20px auto;
+    display: flex;
+    justify-content: end;
+}
+
+.btn1{
+    border: solid 1px;
+    width: 80px;
+    padding:3px 5px;
+    margin: 5px;
+
+}
+#ntcbtn{
+    font-size: 20px;
+    border: none;
+    color:white;
+    padding: 10px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.card img{
+    width:500px;
+    margin:0 auto;
+}

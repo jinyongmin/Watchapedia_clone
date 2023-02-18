@@ -1,0 +1,90 @@
+table{
+    width: 600px;
+    height: 350px;
+    border: 1px solid black;
+}
+tr{
+    border: 1px solid black;
+}
+th{
+    width: 200px;
+    background-color: #ddd;
+    border: 1px solid black;
+    text-align: left;
+    padding:  0px  0px 0px 10px;
+}
+td{
+    border: 1px solid black;
+    padding: 0px 0px 0px 15px;
+}
+table{ 
+    border-collapse : collapse;
+}
+#button{
+   text-align: center;
+    border: 1px solid white;
+    
+}
+.card-body{
+    margin: 20px;
+}
+.modal-wrap {
+    position: fixed;
+    background: rgba(37, 37, 37, 0.4);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal1 {
+    width: 250px;
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.modal h5 {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.modal1 button {
+    background: none;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    height: 50px;
+    color: rgb(234, 33, 66);
+    font-weight: bold;
+}
+
+.modal1 button:first-child {
+    border-right: 1px solid #eee;
+}
+
+.modal1 button:hover {
+    background: #e1eef6;
+}
+
+.modal1 .button-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+button{
+    border: solid 1px;
+    padding: 3px 15px;
+}
+
+a{
+    text-decoration: none;
+}

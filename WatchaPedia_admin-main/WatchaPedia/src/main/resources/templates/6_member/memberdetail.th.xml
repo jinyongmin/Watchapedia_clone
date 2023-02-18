@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="form.button-wrap" th:method="get" th:action=" ${user.userType}=='인플루언서' ? '/member/' + ${user.userIdx} + '/일반유저' : '/member/' + ${user.userIdx} + '/인플루언서'"/>
+    <attr sel="#user-table" th:object="${user}">
+        <attr sel="#user-name" th:text="*{userType}=='인플루언서'?*{userName}+' ✓':*{userName}"/>
+        <attr sel="#user-type" th:text="*{userType}"/>
+        <attr sel="#user-id" th:text="*{userName}"/>
+        <attr sel="#user-ssn" th:text="*{userSsn1} + '-' + *{userSsn2}"/>
+        <attr sel="#user-status" th:text="*{userStatus}"/>
+        <attr sel="#user-caution" th:text="*{userCautionCnt}"/>
+        <attr sel="#user-warning" th:text="*{userWarningCnt}"/>
+        <attr sel="#user-suspension" th:text="*{userSuspensionCnt}"/>
+        <attr sel="#user-lately" th:datetime="*{userLatelyStop}" th:text="*{#temporals.format(userLatelyStop, 'yyyy-MM-dd')}"/>
+        <attr sel="#user-release" th:datetime="*{userReleaseDate}" th:text="*{#temporals.format(userReleaseDate, 'yyyy-MM-dd')}"/>
+    </attr>
+</thlogic>

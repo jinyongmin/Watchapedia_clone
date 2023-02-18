@@ -1,0 +1,50 @@
+#NBox{
+    margin: 2px;
+    display: flex;
+    justify-content: end;
+}
+/*#btn1{*/
+/*    border:0.5px solid rgb(241, 241, 241); */
+/*    width: 80px;*/
+/*}*/
+/*#btn2{*/
+/*    border:0.5px solid rgb(241, 241, 241); */
+/*}*/
+
+
+.btn1{
+    border:0.5px solid rgb(241, 241, 241);
+    width: 80px;
+    padding:3px 5px;
+    margin: 5px;
+    border: solid 1px;
+}
+.drag-file{
+
+}
+
+button{
+    border:none
+}
+
+#status_btn{
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+}
+
+#status_btn_active{
+    width:100px;
+    height:30px;
+}
+#btn1{
+    border: none;
+    padding: 5px 15px;
+    background-color: #969696;
+    color: white;
+    border-radius: 5px;
+}
+
+a{
+    text-decoration: none;
+}

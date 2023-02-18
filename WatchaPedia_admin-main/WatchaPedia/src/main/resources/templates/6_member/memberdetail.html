@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <link href="../css/6_member/userpage.css"  rel="stylesheet" />
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+    <!-- topbar.html -->
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+    <!-- topbar.html 끝 -->
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <!-- sidenav.html -->
+                <div th:replace="fragment/sidenav :: sidenav"></div>
+                <!-- sidenav.html 끝 -->
+
+                <!-- sidefooter.html -->
+                <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+                <!-- sidefooter.html 끝 -->
+            </nav>
+        </div>
+        <div id="app">
+            <div class="modal-wrap" v-if="v_if_visible">
+                <div class="modal1">
+                    <div style="font-size: 20px; padding: 10px">알림</div>
+                    <div>이 유저를 인플루언서(유저)로 <br />
+                        변경하시겠습니까?
+                    </div>
+                    <form class="button-wrap">
+                            <button class="ok" type="submit">확인</button>
+                            <button @click="v_if_visible=!v_if_visible" class="no">취소</button>
+                    </form>
+                </div>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">회원관리</h1>
+                        <div class="row">
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                회원관리
+                            </div>
+                            <div class="card-body">
+                                <h4>회원상세정보</h4>
+
+                                <table id="user-table">
+                                    <thead>
+                                        <tr>
+                                            <th>이름</th>
+                                            <td id="user-name">김사과</td>
+                                        </tr>
+                                        <tr>
+                                            <th>회원유형</th>
+                                            <td>
+                                                <h6 id="user-type" style="display: inline-block">일반</h6>
+                                                <button style="margin-right: 10px; float: right" @click="v_if_visible=!v_if_visible">
+                                                    {{message}}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>아이디</th>
+                                            <td id="user-id">asada112121</td>
+                                        </tr>
+                                        <tr>
+                                            <th>주민번호</th>
+                                            <td id="user-ssn">970219-1******</td>
+                                        </tr>
+                                        <tr>
+                                            <th>계정상태</th>
+                                            <td id="user-status">정지</td>
+                                        </tr>
+                                        <tr>
+                                            <th>주의</th>
+                                            <td id="user-caution">6</td>
+                                        </tr>
+                                        <tr>
+                                            <th>경고</th>
+                                            <td id="user-warning">7</td>
+                                        </tr>
+                                        <tr>
+                                            <th>정지횟수</th>
+                                            <td id="user-suspension">8</td>
+                                        </tr>
+                                        <tr>
+                                            <th>최근정지날짜</th>
+                                            <td id="user-lately">2022-12-20</td>
+                                        </tr>
+                                        <tr>
+                                            <th>정지해제날짜</th>
+                                            <td id="user-release">2022-12-25</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="button">
+                    <button  onclick="location.href='/member'">목록으로</button></div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        const userTypeTxt = document.querySelector("#user-type").innerHTML;
+
+        let userType = createApp({
+            data() {
+                return {
+                    v_if_visible: false,
+                    isModal: false,
+                    message: "인플루언서 전환",
+                };
+            },
+
+            methods: {
+                change: function () {
+                    this.isModal = !this.isModal;
+                    this.v_if_visible = !this.v_if_visible;
+                },
+            },
+        }).mount("#app");
+
+        if(userTypeTxt == "일반유저"){
+            userType.message = "인플루언서 전환";
+        }else{
+            userType.message = "일반유저 전환"
+        }
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../../js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="../../js/datatables-simple-demo.js"></script>
+    </body>
+</html>

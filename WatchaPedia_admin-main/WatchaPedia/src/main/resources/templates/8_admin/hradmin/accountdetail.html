@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/css/8_admin/hradmin/accountdetail.css" rel="stylesheet" />
+
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    <body class="sb-nav-fixed">
+    <!-- topbar.html -->
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+    <!-- topbar.html 끝 -->
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div th:replace="fragment/sidenav :: sidenav"></div>
+                <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+            </nav>
+        </div>
+
+
+            <!-- 메인콘텐츠 시작 -->
+            <div id="app">
+                <div class="modal-wrap" v-if="isModal">
+                  <div class="modal1">
+                    <br />
+                    <div>정말로 삭제 하시겠습니까?</div>
+                    <div class="button-wrap">
+                      <button @click="isModal=!isModal" class="ok">취소</button>
+                      <button onclick="deleteAccount()" class="no">확인</button>
+                    </div>
+                  </div>
+                </div>
+            <div id="layoutSidenav_content">
+            
+                <div id="main_box">
+                    <div id="titlediv">
+                        <p id="main_title">상세조회</p>
+                    </div>
+                    <div id="content_box">
+                        <div id = "content_side_center_box">
+                            <form id = "content_updown_center_box">
+                                <div id = "input_box">
+                                    <table id="account-table">
+                                        <div id="admin-adminIdx" hidden></div>
+                                        <tr>
+                                            <td class="graytd">이름</td>
+                                            <td id="admin-name">자바왕</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="graytd">사원번호</td>
+                                            <td id="admin-number">111111</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="graytd">관리자유형</td>
+                                            <td id="admin-type">인사관리자</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="graytd">아이디</td>
+                                            <td id="admin-id">amy1228</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div id="button_box">
+                                    <p>
+                                        <button type="button" @click="isModal=!isModal">
+                                            관리자삭제
+                                            <a id="infoUpdate" ><button type="button"> 정보수정 </button></a>
+                                        <button type="button" onclick="location.href='/hradmin/searchaccount'"> 목록으로 </button>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const { createApp } = Vue;
+            let modalVue = createApp({
+              data() {
+                return {
+                  isModal: false,
+                };
+              },
+            }).mount("#app");
+
+            function deleteAccount(){
+                modalVue.isModal = false;
+
+                const adminIdx = document.getElementById("admin-adminIdx")
+
+                fetch('http://localhost:9090/api/admin/delete',{
+                    method: 'POST',
+                    headers: { 'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        "transaction_time":`${new Date()}`,
+                        "resultCode":"ok",
+                        "data":{
+                            "adminIdx":`${adminIdx.innerText}`
+                        },
+                        "description":"정상"
+                    })
+                })
+                    .then((res) => {
+                        alert('삭제성공!');
+                        location.href = '/hradmin/searchaccount';
+                    })
+            }
+          </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/assets/demo/chart-area-demo.js"></script>
+        <script src="/assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/js/datatables-simple-demo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+#MBox{
+    display: flex;
+    justify-content: end;
+    padding:15px;
+}
+#btn1{
+    border:solid 1px;
+    width: 80px;
+}
+
+a{
+    text-decoration: none;
+}

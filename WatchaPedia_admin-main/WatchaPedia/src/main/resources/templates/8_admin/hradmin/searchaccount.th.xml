@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#account-table" th:remove="all-but-first">
+        <attr sel=".account-tr" th:each="admin : ${admins}">
+            <attr sel=".admin-idx" th:text=" ${admin.adminIdx}"/>
+            <attr sel=".admin-name" th:text=" ${admin.adminName}"/>
+            <attr sel=".admin-id/a" th:text="${admin.adminId}" th:href="@{'/hradmin/'+${admin.adminIdx}}"/>
+            <attr sel=".admin-number" th:text="${admin.adminNumber}"/>
+            <attr sel=".admin-type" th:text="${admin.adminType}"/>
+            <attr sel=".admin-reg-date" th:text="${#temporals.format(admin.regDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+        </attr>
+    </attr>
+</thlogic>

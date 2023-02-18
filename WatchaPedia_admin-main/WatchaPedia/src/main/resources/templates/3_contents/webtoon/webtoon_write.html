@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+      rel="stylesheet"
+    />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/3_contents/webtoon/webtoon_write.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--These jQuery libraries for select2 need to be included-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css"
+    />
+
+    <script>
+      $(document).ready(function () {
+        //Select2
+        $(".country").select2({
+          maximumSelectionLength: 10,
+        });
+      });
+    </script>
+  </head>
+
+  <body class="sb-nav-fixed">
+  <div id="person_search_modal">
+    <div id="person_modal_bigbox">
+      <div class="modal_big_title"><div>인물검색</div></div>
+      <input
+              id="modal_search_bar"
+              v-model="search_msg"
+              onchange="search_db()"
+              placeholder="예) 박찬욱, 손현주, 이성민"
+      />
+      <div id="modal_search_result">
+        <!--     검색결과 반복틀 시작!      -->
+        <div class="onePersonBigBox" v-for="person in itemlist">
+          <div hidden>{{person.perIdx}}</div>
+          <div class="profileBox">
+            <img :src=`${person.perPhoto}` class="personSimg"></div>
+          <div class="contentBox">
+            <b>{{person.perName}}</b>
+            <p>{{person.perRole}}</p>
+            <div class="appearBoxes">
+              <div v-for="appear in person.appearance">{{appear}}</div>
+            </div>
+          </div>
+          <div class="chooseBtnBox">
+            <button v-if="person.chooseCheck == null" class="chooseBtn" onclick="choseCheck(this)">선택</button>
+            <button v-if="person.chooseCheck != null" class="chooseBtn" onclick="choseCheck(this)">✔️선택됨</button>
+          </div>
+        </div>
+      </div>
+      <div v-if="modalInnerBtn" id="person_search_cancel" onclick="search_cancel()">선택완료</div>
+      <div v-if="!modalInnerBtn" class="flexCenterCenter">
+        <div class="btn_css" onclick="choosePerson(this)">추가하기</div>
+        <div class="btn_css" onclick="goBackList()">뒤로가기</div>
+      </div>
+    </div>
+  </div>
+    <!-- topbar.html -->
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+    <!-- topbar.html 끝 -->
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <!-- sidenav.html -->
+          <div th:replace="fragment/sidenav :: sidenav"></div>
+          <!-- sidenav.html 끝 -->
+
+          <!-- sidefooter.html -->
+          <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+          <!-- sidefooter.html 끝 -->
+        </nav>
+      </div>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">웹툰</h1>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                웹툰
+              </div>
+              <div id="into">기본정보</div> 
+              <div class="card-body">
+
+                <div id="inputbox">
+                  <div>
+                    <input
+                            type="text"
+                            placeholder="표기할 웹툰명"
+                            class="inBox1"
+                            id="webTitle"
+
+                    />
+                  </div>
+                  <div>
+                    <input type="text" placeholder="원제" class="inBox1" id="webTitleOrg"/>
+                  </div>
+
+                  <div>
+                    <input type="text" placeholder="작가" class="inBox1" id="webWriter"/>
+                  </div>
+
+                  <div
+                    class="container"
+                    style="
+                      padding-right: 0px;
+                      padding-left: 0px;
+                      width: 95%;
+                      margin: 0 0 0 10px;
+                    "
+                  >
+                    <img
+                      src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
+                      style="margin: 10px 0 0 0"
+                    />
+                    <select
+                      class="country"
+                      multiple="true"
+                      style="
+                        width: 100%;
+                        border-top-width: 0px;
+                        border-right-width: 0px;
+                        border-bottom-width: 0px;
+                        border-left-width: 0px;
+                        border: 1px solid rgb(255, 255, 255);
+                      "
+                      id="webGenre"
+                    >
+                      <option value="" disabled hidden>장르</option>
+                      <option value="액션">액션</option>
+                      <option value="모험">모험</option>
+                      <option value="예술">예술</option>
+                      <option value="코미디">코미디</option>
+                      <option value="블랙코미디">블랙코미디</option>
+                      <option value="로멘틱">로멘틱</option>
+                      <option value="다큐멘터리">다큐멘터리</option>
+                      <option value="드라마">드라마</option>
+                      <option value="시대극">시대극</option>
+                      <option value="멜로드라마">멜로드라마</option>
+                      <option value="교육영화">교육영화</option>
+                      <option value="판타지">판타지</option>
+                      <option value="과학 판타지">과학 판타지</option>
+                      <option value="누아르">누아르</option>
+                      <option value="공포">공포</option>
+                      <option value="뮤지컬">뮤지컬</option>
+                      <option value="미스터리">미스터리</option>
+                      <option value="포르노">포르노</option>
+                      <option value="성인">성인</option>
+                      <option value="멜로">멜로</option>
+                      <option value="로맨스">로맨스</option>
+                      <option value="재난">재난</option>
+                      <option value="좀비">좀비</option>
+                      <option value="전쟁">전쟁</option>
+                      <option value="애니메이션">애니메이션</option>
+                      <option value="독립">독립</option>
+                      <option value="스포츠">스포츠</option>
+                      <option value="음악">음악</option>
+                      <option value="뮤지컬">뮤지컬</option>
+                      <option value="틴에이저">틴에이저</option>
+                      <option value="시트콤">시트콤</option>
+                      <option value="가족">가족</option>
+                      <option value="역사">역사</option>
+                      <option value="독립">독립</option>
+                      <option value="스포츠">스포츠</option>
+                      <option value="음악">음악</option>
+                      <option value="뮤지컬">뮤지컬</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <select name="info" class="inBox1" id="webSerDetail">
+                      <option value="" disabled selected>연재 정보</option>
+                      <option value="연재 중">연재 중</option>
+                      <option value="완결">완결</option>
+                      <option value="장기 휴재">장기 휴재</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <select name="day" class="inBox1" id="webSerDay">
+                      <option value="" disabled selected>연재 요일</option>
+                      <option value="월">월</option>
+                      <option value="화">화</option>
+                      <option value="수">수</option>
+                      <option value="목">목</option>
+                      <option value="금">금</option>
+                      <option value="토">토</option>
+                      <option value="일">일</option>
+                      <option value="기타">기타</option>
+                    </select>
+                  </div>
+
+                  <div class="date">
+                    <input
+                      type="date"
+                      data-placeholder="연재 시작일"
+                      aria-required="true"
+                      value="{startDateValue}"
+                      className="{styles.selectDay}"
+                      required
+                      class="inBox1"
+                      id="webSerPeriodStart"
+                    />
+                    ~
+                    <input
+                      type="date"
+                      data-placeholder="연재 종료일"
+                      aria-required="true"
+                      value="{startDateValue}"
+                      className="{styles.selectDay}"
+                      required
+                      class="inBox1"
+                      id="webSerPeriodEnd"
+                    />
+                  </div>
+
+                  <div>
+                    <select name="age" class="inBox1" id="webAge">
+                      <option value="" disabled selected>연재 등급</option>
+                      <option value="전체연령가">전체연령가</option>
+                      <option value="12세 관람가">12세 관람가</option>
+                      <option value="15세 관람가">15세 관람가</option>
+                      <option value="청소년 이용 불가">청소년 이용 불가</option>
+                      <option value="제한연령가">제한연령가</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    출연/제작
+                    <p>
+                      <button
+                              type="button"
+                              onclick="person_search_visible()"
+                              id="Mbtn"
+                      >
+                        인물검색
+                      </button>
+                    </p>
+                  </div>
+
+                  <div id="authorBox">
+                    <div class="onePersonSmallBox" v-for="person in itemlist2">
+                      <div hidden class="hiddenBox" v-if="person.perJob != '감독'&&person.perCasting != ''">{{person.perIdx}}({{person.perJob}} | {{person.perCasting}})</div>
+                      <div hidden class="hiddenBox" v-if="person.perJob != '감독'&&person.perCasting == ''">{{person.perIdx}}({{person.perJob}})</div>
+                      <div hidden class="hiddenBox" v-if="person.perJob == '감독'">{{person.perIdx}}({{person.perJob}})</div>
+                      <div class="smallProfileBox">
+                        <img :src=`${person.perPhoto}` class="smallPersonSimg">
+                      </div>
+                      <div class="smallContentBox">
+                        <b>{{person.perName}}</b>
+                        <p v-if="person.perJob != '감독'&&person.perCasting != ''">({{person.perJob}} | {{person.perCasting}})</p>
+                        <p v-if="person.perJob != '감독'&&person.perCasting == ''">({{person.perJob}})</p>
+                        <p v-if="person.perJob == '감독'">({{person.perJob}})</p>
+                      </div>
+                      <div onclick="minusItemlist2(this)" type="button">
+                        <img
+                                class="minus_button"
+                                src="/assets/img/x_icon.png"
+                                alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            
+                <div id="inputbox2">
+                  <div>
+                    <input type="text" id="webSummary" placeholder="내용" />
+                  </div>
+                  <div id="wgo">
+                    <div>감상가능한 곳</div>
+                    <div class="wgo2">
+                      <div class="wBox">
+                        <div class="wBox2">
+                          <div id="platform_contain">
+                            <select
+                              name="platform"
+                              id="platform"
+                              onchange="createOtt(this.value)"
+                            >
+                              <option value="" disabled selected>플랫폼</option>
+                              <option value="네이버웹툰">네이버웹툰</option>
+                              <option value="카카오웹툰">카카오웹툰</option>
+                              <option value="레진코믹스">레진코믹스</option>
+                              <option value="왓챠">왓챠</option>
+                              <option value="카카오페이지">카카오페이지</option>
+                              <option value="봄툰">봄툰</option>
+                              <option value="리디">리디</option>
+                            </select>
+                          </div>
+                          <div>
+                            <input
+                              type="text"
+                              placeholder="URL주소"
+                              class="wBox3"
+                              id="vurl"
+                            />
+                          </div>
+                        </div>
+                        <img
+                          onclick="ottVisible()"
+                          id="ott_plus_icon"
+                          src="/image/plus_outline_icon.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="wBox">
+                        <div id="kakaoWeb_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-img.amz.wtchn.net/image/v2/99d4e859369d8e0551e37008821eff3f.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd1lYUm9Jam9pTDNZeUwzTjBiM0psTDNWcGJXRm5aUzh4TmpJMk1qVTJPRFU1T0RJMk5EWTFPVFUzSW4wLkhYXzBzLS1HZXJJRmNPel9xNVU2NHQySFdyLVdhN1QtcDJfWnIwVjRhMkU"
+                            alt=""
+                          />
+                          <div class="ott_name">카카오웹툰
+                            <input type="hidden" id="kakaoWeb_url" value="">
+                          </div>
+                          <div id="kakaoWeb_box_X" onclick="delval('kakaoWeb_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                        <div id="reginComics_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-img.amz.wtchn.net/image/v2/b231bef9831202792604d860b33c23ff.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd1lYUm9Jam9pTDNZeUwzTjBiM0psTDNWcGJXRm5aUzh4TmpJMU9ESTVNakkxT0RNd05qVTJORGMySW4wLm5tYTFQVjJzMTdWTVVsd1k4T2xzX3c0VDRZOE1qOVh5STltYzNobGxMWXc"
+                            alt=""
+                          />
+                          <div class="ott_name">레진코믹스
+                            <input type="hidden" id="reginComics_url" value="">
+                          </div>
+                          <div id="reginComics_box_X" onclick="delval('reginComics_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                        <div id="watcha_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-glx.amz.wtchn.net/images/ex_watcha_logo_square.png"
+                            alt=""
+                          />
+                          <div class="ott_name">왓챠
+                            <input type="hidden" id="watcha_url" value="">
+                          </div>
+                          <div id="watcha_box_X" onclick="delval('watcha_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+
+                        <div id="kakaoPage_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-img.amz.wtchn.net/image/v2/1df129bd0ce377ca9086af5a3b98f211.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd1lYUm9Jam9pTDNZeUwzTjBiM0psTDNWcGJXRm5aUzh4TmpJMU1qQXlORFV6TkRNNE56RTROalF4SW4wLm1lOERRdlpmV2hPNldWa1A3a3FqNkd0MVRVTHMzVnMtMldhbk55dDhMOU0"
+                            alt=""
+                          />
+                          <div class="ott_name">카카오페이지
+                            <input type="hidden" id="kakaoPage_url" value="">
+                          </div>
+                          <div id="kakaoPage_box_X" onclick="delval('kakaoPage_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+
+                        <div id="naverWebtoon_box">
+                          <img
+                            class="ott_img"
+                            src="/assets/img/Naver_Webtoon_logo.png"
+                            alt=""
+                          />
+                          <div class="ott_name">네이버웹툰
+                            <input type="hidden" id="naverWebtoon_url" value="">
+                          </div>
+                          <div id="naverWebtoon_box_X" onclick="delval('naverWebtoon_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+
+                        <div id="bomtoon_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-img.amz.wtchn.net/image/v2/8c4268486e23642c8b9e7eb9ab2caddd.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd1lYUm9Jam9pTDNZeUwzTjBiM0psTDNWcGJXRm5aUzh4TmpJMk1qVTJPRE14T1RFMU1qRTFPREEzSW4wLkp1SWhkSDVuRVVYVG5aVXJ1NTcyTHZBUUxudFpGa3JyY3otUV9sYlNTQmc"
+                            alt=""
+                          />
+                          <div class="ott_name">봄툰
+                            <input type="hidden" id="bomtoon_url" value="">
+                          </div>
+                          <div id="bomtoon_box_X" onclick="delval('bomtoon_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+
+                        <div id="ready_box">
+                          <img
+                            class="ott_img"
+                            src="https://an2-img.amz.wtchn.net/image/v2/yPNxIZI5lNSZE7g1Pp4UXg.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM1ZwYldGblpTOHhOalV3TXpRM01UQXhOekF4T0RjNU5EazNJbjAudG5JdXE5U0kwX2JDMnBtcjN6MUVlMFl6ckVqMXVvV2x0cUdUVXJnUnYzUQ"
+                            alt=""
+                          />
+                          <div class="ott_name">리디
+                            <input type="hidden" id="ready_url" value="">
+                          </div>
+                          <div id="ready_box_X" onclick="delval('ready_url')">
+                            <img
+                              class="x_icon"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="conBox2">
+                    <div id="po">
+                      포스터
+                      <span
+                        style="color: red; font-size: smaller;"
+                        >*1개의 파일만 등록가능합니다.</span
+                      >
+                      <div id="poBox">
+                        <label for="pobtn">파일 선택 </label>
+                        <input
+                          type="file"
+                          accept=".jpg, .jpeg, .png, .gif"
+                          id="pobtn"
+                          onchange="readLink(this);"
+                        />
+                        <div id="poBox2">
+                          <p class="file">파일 끌어다 추가하기</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="ba">
+                      배경사진
+                      <span
+                        style="color: red; font-size: smaller;"
+                        >*1개의 파일만 등록가능합니다.</span
+                      >
+                      <div id="baBox">
+                        <label for="babtn">파일 선택 </label>
+                        <input
+                          type="file"
+                          accept=".jpg, .jpeg, .png, .gif"
+                          id="babtn"
+                          onchange="readLink1(this);"
+                        />
+                        <div id="baBox2">
+                          <p class="file">파일 끌어다 추가하기</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div id="MBox">
+              <button id="btn1" onclick="sendit()">등록하기</button>
+              <button id="btn2" onclick="location.href='/contents/webtoon'">취소하기</button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script defer src="/js/Webtoon_Write.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/assets/demo/chart-area-demo.js"></script>
+    <script src="/assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/datatables-simple-demo.js"></script>
+  </body>
+</html>

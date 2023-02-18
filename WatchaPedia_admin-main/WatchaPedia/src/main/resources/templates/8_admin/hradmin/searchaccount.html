@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="/css/8_admin/hradmin/searchaccount.css" rel="stylesheet" />
+        <style>
+            .idsA{
+                color: black;
+            }
+        </style>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+    <!-- topbar.html -->
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+    <!-- topbar.html 끝 -->
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <!-- sidenav.html -->
+                <div th:replace="fragment/sidenav :: sidenav"></div>
+                <!-- sidenav.html 끝 -->
+
+                <!-- sidefooter.html -->
+                <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+                <!-- sidefooter.html 끝 -->
+            </nav>
+        </div>
+
+            <!-- 메인콘텐츠 시작 -->
+            <div id="layoutSidenav_content">
+            
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">계정조회</h1>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                계정조회
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>이름</th>
+                                            <th>아이디</th>
+                                            <th>사원번호</th>
+                                            <th>관리자유형</th>
+                                            <th>계정등록일</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>이름</th>
+                                            <th>아이디</th>
+                                            <th>사원번호</th>
+                                            <th>관리자유형</th>
+                                            <th>계정등록일</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody id="account-table">
+                                        <tr class="account-tr">
+                                            <td class="admin-idx">Tiger Nixon</td>
+                                            <td class="admin-name">System Architect</td>
+                                            <td class="admin-id"><a class="idsA">Edinburgh</a></td>
+                                            <td class="admin-number">61</td>
+                                            <td class="admin-type">2011/04/25</td>
+                                            <td class="admin-reg-date">$320,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Donna Snider</td>
+                                            <td>Customer Support</td>
+                                            <td>New York</td>
+                                            <td>27</td>
+                                            <td>2011/01/25</td>
+                                            <td>$112,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/assets/demo/chart-area-demo.js"></script>
+        <script src="/assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/js/datatables-simple-demo.js"></script>
+    </body>
+</html>

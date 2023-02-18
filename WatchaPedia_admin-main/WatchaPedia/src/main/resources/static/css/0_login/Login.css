@@ -1,0 +1,104 @@
+section {
+  width: 550px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 12%;
+}
+
+img[alt='메인']{
+  margin-left: 20px;
+}
+
+#icon {
+  margin: 0;
+}
+
+#bor {
+  margin: 0 auto;
+  width: 450px;
+  height: 250px;
+  border: 5px solid #f50b59;
+  padding: 23px;
+}
+
+#bor5 .te{
+  display: none;
+}
+
+#main {
+  margin: 0;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 800;
+  text-align: right;
+}
+
+hr {
+  margin: 0;
+}
+
+.te {
+  width: 150px;
+  height: 10px;
+  margin: 0px 10px;
+  color: #949494;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 20px;
+}
+
+#bor3 {
+  display: flex;
+}
+#bor4 {
+  display: flex;
+}
+
+.fo {
+  width: 220px;
+  height: 30px;
+  background-color: #e2e2e2;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  margin: 12px;
+  text-align: center;
+}
+
+.fo:focus {
+  background-color: #fddada;
+  border: 2px solid #f50b59;
+}
+
+/* input박스 클릭시 테두리 없애기 */
+.fo:focus {
+  outline: none;
+}
+
+#bor5 {
+  display: flex;
+}
+
+button {
+  color: #ffffff;
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
+  margin: 10px 10px;
+  font-weight: 700;
+  background-color: #ff2f6e;
+  border: 1px solid #ffffff;
+  margin: 0 auto;
+  margin-top: 22px;
+  border-radius: 10px;
+}
+
+.hidden_warning {
+  display: none;
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
+.hidden_warning.visible {
+  display: block;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#input_box">
+        <attr sel="#adminId" th:value=" ${adminUser.adminId}"/>
+        <attr sel="#adminPw" th:value=" ${adminUser.adminPw}"/>
+        <attr sel="#adminPwRe" th:value=" ${adminUser.adminPw}"/>
+        <attr sel="#adminNumber" th:value="${adminUser.adminNumber}"/>
+        <attr sel="#adminName" th:value="${adminUser.adminName}"/>
+        <attr sel="#adminType" th:value="${adminUser.adminType}"/>
+        <attr sel="#adminIdx" th:value="${adminUser.adminIdx}"/>
+    </attr>
+</thlogic>

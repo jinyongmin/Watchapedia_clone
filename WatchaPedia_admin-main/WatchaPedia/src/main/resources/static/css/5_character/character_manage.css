@@ -1,0 +1,107 @@
+#nemo {
+  border: 1px solid rgb(209, 208, 208);
+  display: inline-block;
+  margin-left: 0;
+  justify-content: space-around;
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+#nemo1 {
+  height: 90px;
+  width: 90px;
+  border: 1px solid rgb(209, 208, 208);
+  /* display: inline-block; */
+  display: flex;
+  /* justify-content: space-evenly; */
+  /* flex-direction: row; */
+  /* float: left; */
+}
+#nemonemo {
+  padding: 5px;
+  height: 90px;
+  width: 300px;
+}
+img {
+  height: 80px;
+  width: 80px;
+}
+.box {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 900px;
+}
+.boxx {
+  list-style: none;
+  height: 700px;
+}
+.nemonemo {
+  list-style: none;
+  padding: 0px;
+  margin: 0px -15px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+li {
+  list-style: none;
+}
+#nemotext {
+  display: inline-block;
+  vertical-align: top;
+}
+/*#nemotext2 {*/
+/*  display: inline-block;*/
+/*  background-color: ;*/
+/*}*/
+#ex1 {
+  position: relative;
+  top: 1px;
+}
+#ex2 {
+  height: 20px;
+  width: 200px;
+  display: flex;
+  margin-top: 5px;
+}
+
+.exBox {
+  margin: 1px 4px;
+  display: inline-block;
+  background-color: rgb(225, 224, 224);
+  width: auto;
+  height: 25px;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.td_flex {
+  display: flex;
+  justify-content: space-between;
+}
+/* .dataTable-pagination-list{
+    position: relative;
+    top:100px;
+} */
+
+
+/*등록버튼 우측 정렬*/
+#MBox{
+  display: flex;
+  justify-content: end;
+  padding:15px;
+}
+#btn1{
+
+   border:solid 1px;
+   width: 80px;
+ }
+
+a{
+  text-decoration: none;
+}
+
+td{
+  line-height: 70px;
+}

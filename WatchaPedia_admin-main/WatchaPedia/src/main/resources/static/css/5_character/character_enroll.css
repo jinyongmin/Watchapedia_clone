@@ -1,0 +1,98 @@
+*{
+    box-sizing: border-box;
+}
+#container{
+    margin: 5px 0px 20px;
+    height: 198px;
+    width: 198px;
+
+
+}
+#name{
+    height: 40px;
+    width: 45%;
+    margin: 10px 0px 20px;
+
+}
+#bio{
+    height: 170px;
+    width:55%;
+    margin: 5px 0px 10px;
+}
+.push{
+    text-align: center;
+  
+}
+#ch_cancel{
+    margin: 0px 0px 10px;
+}
+#ch_regis{
+    margin: 0px 0px 10px;
+}
+#root{
+    width:240px;
+    height:240px;
+    margin-bottom:50px;
+}
+.jfile{
+    width: 240px;
+    height: 240px;
+}
+#root>div{
+    width: 242px;
+    height: 242px;
+}
+#root>div>div{
+    width: 240px;
+    height: 240px;
+    background-image: url("/image/camera.png");
+}
+
+
+
+/* -------------------------------- */
+.conBox2 {
+    display: flex;
+    margin: 0 auto;
+    height: 200px;
+}
+
+#po,
+#ba {
+    width: 405px;
+}
+
+#poBox {
+    color:gray;
+    width: 95%;
+    height: 150px;
+    border: 1px solid rgb(0, 0, 0);
+}
+#pobtn {
+    background: 1px solid rgb(228, 223, 223);
+    color: #fff;
+    position: absolute;
+    width: auto;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#poBox label {
+    display: inline-block;
+    height: 35px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #c4c4c4;
+    cursor: pointer;
+    margin: 10px 20px;
+}
+
+#poBox2 {
+    margin: 1px auto;
+    width: 320px;
+    height: 80px;
+    border: 1px solid rgb(228, 223, 223);
+}

@@ -1,0 +1,329 @@
+#adTitle{
+    width: 100%; border:0.5px solid rgb(241, 241, 241);
+    padding-left:16px;
+}
+
+#btn0{
+    display: flex;
+    margin: 0px 10px;
+    justify-content: end;
+}
+
+#butn{
+    border:0.5px solid rgb(241, 241, 241);
+    margin-left:10px;
+}
+.tox-statusbar__branding{
+    display: none;
+}
+
+
+#root {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.title {
+    text-align: center;
+}
+
+.centerdiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgpdiv{
+    border: solid black 1px;
+    width: 500px;
+}
+#preview{
+    width: 100%;
+}
+
+.butn{
+    border:solid 1px ;
+    margin: 5px;
+}
+#adBtnLink{
+    width: 500px;
+    heigth: 50px;
+}
+
+
+
+/*이미지업로드*/
+.conBox2 {
+    display: flex;
+    margin: 0 auto;
+}
+
+#po,
+#ba {
+    width: 225px;
+    margin-right:50px;
+}
+#bba{
+    width: 500px;
+
+}
+
+#poBox {
+    color:gray;
+    width: 100%;
+    height: 100px;
+    border: 1px solid rgb(0, 0, 0);
+}
+#pobtn {
+    background: 1px solid rgb(228, 223, 223);
+    color: #fff;
+    position: absolute;
+    width: auto;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#poBox label {
+    display: inline-block;
+    height: 35px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #c4c4c4;
+    cursor: pointer;
+    margin: 10px 20px;
+}
+
+#poBox2 {
+    margin: 1px auto;
+    width: 200px;
+    height: 30px;
+    border: 1px solid rgb(228, 223, 223);
+}
+
+#baBox {
+    height: 150px;
+    border: 1px solid rgb(228, 223, 223);
+}
+
+#babtn {
+    background: 1px solid rgb(228, 223, 223);
+    color: #fff;
+    position: absolute;
+    width: auto;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#baBox label {
+    display: inline-block;
+    height: 35px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #c4c4c4;
+    cursor: pointer;
+    margin: 10px 20px;
+}
+
+#baBox2 {
+    margin: 0 auto;
+    width: 400px;
+    height: 80px;
+    border: 1px solid rgb(228, 223, 223);
+}
+
+#MBox {
+    display: flex;
+    justify-content: center;
+    margin:10px;
+}
+
+#btn1,
+#btn2 {
+    margin: 0 5px;
+    border: 0.5px solid rgb(228, 223, 223);
+}
+
+#plus_img {
+    position: relative;
+}
+#minus_img {
+    position: relative;
+}
+
+
+#only_flex_box {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+
+}
+
+#inputbox,
+#inputbox2 {
+    width: 50%;
+}
+
+.card-body {
+    display: flex;
+    padding: 5px !important;
+}
+#movSummary {
+    margin: 0 auto 0 10px;
+    width: 95%;
+    height: 93px;
+    border: 1px solid rgb(228, 223, 223);
+}
+.total_size_kb {
+    display: none;
+}
+#blank_container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#total_file_info {
+    position: relative;
+    top: 8px;
+    left: 20px;
+    width: 130px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#margin_little {
+    margin: 10px;
+    width: 85%;
+    overflow: hidden;
+}
+#inputFile {
+    position: absolute;
+    width: auto;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#blank_container label {
+    display: inline-block;
+    height: 35px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #c4c4c4;
+    cursor: pointer;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.card1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgb(228, 223, 223);
+    border-radius: 0.25rem;
+    width: 100%;
+    height: 250px;
+    align-items: center;
+}
+
+.file-input1 {
+    position: relative;
+
+    background-color: rgb(228, 223, 223);
+    padding: 5px;
+    border-radius: 8%;
+    top: 5px;
+}
+
+.file-input2 {
+    border: none;
+    background-color: rgb(228, 223, 223);
+    /* right: 20%; */
+}
+
+.image-upload {
+    flex-direction: column;
+    min-width: 0;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+    align-items: center;
+    right: 10%;
+}
+
+#resultFile {
+    flex-direction: column;
+    min-width: 0;
+    background-clip: border-box;
+    border: 1px solid rgb(228, 223, 223);
+    border-radius: 0.25rem;
+    width: 100%;
+    height: 150px;
+    overflow: auto;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#mbox {
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgb(228, 223, 223);
+    border-radius: 0.25rem;
+    width: 350px;
+    height: 290px;
+    align-items: center;
+}
+
+.file {
+    margin: auto 0;
+    width: 250px;
+    opacity: 0.5;
+}
+
+/*이미지업로드*/
+
+
+/*동영상*/
+#adVideoSource{
+    width:225px;
+}
+
+#adClient{
+    width:100%;
+}
+
+.ddiv{
+    margin-top : 20px;
+}
+
+#adText{
+    width : 500px;
+    resize: none;
+}
+#adBtnText{
+    width : 450px;
+    height: 50px;
+}
+#adDescription{
+    width: 500px;
+}
