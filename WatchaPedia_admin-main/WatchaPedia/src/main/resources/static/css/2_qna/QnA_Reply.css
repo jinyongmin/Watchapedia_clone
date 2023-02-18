@@ -1,0 +1,19 @@
+#QnABox{
+    border:0.5px solid rgb(241, 241, 241)  !important;
+}
+#QnABox>div{
+    border:0.5px solid rgb(241, 241, 241)  !important;
+}
+
+#QBox{
+    border:0.5px solid rgb(241, 241, 241)  !important;
+}
+#btn0{
+    width: 50%;
+    margin: 10px 45%;
+}
+
+#btn1, #btn2{
+    border: solid 1px;
+    margin: 5px;
+}

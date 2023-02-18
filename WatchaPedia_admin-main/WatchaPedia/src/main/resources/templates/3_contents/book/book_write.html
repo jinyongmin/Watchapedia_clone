@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Dashboard - SB Admin</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+          rel="stylesheet"
+  />
+  <script src="https://unpkg.com/vue@3"></script>
+  <link href="/css/styles.css" rel="stylesheet" />
+  <link href="/css/3_contents/book/book_write.css" rel="stylesheet" />
+  <script
+          src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+          crossorigin="anonymous"
+  ></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link
+          rel="stylesheet"
+          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+  />
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!--These jQuery libraries for select2 need to be included-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css"
+  />
+  <script>
+    $(document).ready(function () {
+      //Select2
+      $(".country").select2({
+        maximumSelectionLength: 10,
+      });
+    });
+  </script>
+</head>
+
+<body class="sb-nav-fixed">
+<div id="person_search_modal">
+  <div id="person_modal_bigbox">
+    <div class="modal_big_title"><div>인물검색</div></div>
+    <input
+            id="modal_search_bar"
+            v-model="search_msg"
+            onchange="search_db()"
+            placeholder="예) 박찬욱, 손현주, 이성민"
+    />
+    <div id="modal_search_result">
+      <!--     검색결과 반복틀 시작!      -->
+      <div class="onePersonBigBox" v-for="person in itemlist">
+        <div hidden>{{person.perIdx}}</div>
+        <div class="profileBox">
+          <img :src=`${person.perPhoto}` class="personSimg"></div>
+        <div class="contentBox">
+          <b>{{person.perName}}</b>
+          <p>{{person.perRole}}</p>
+          <div class="appearBoxes">
+            <div v-for="appear in person.appearance">{{appear}}</div>
+          </div>
+        </div>
+        <div class="chooseBtnBox">
+          <button v-if="person.chooseCheck == null" class="chooseBtn" onclick="choseCheck(this)">선택</button>
+          <button v-if="person.chooseCheck != null" class="chooseBtn" onclick="choseCheck(this)">✔️선택됨</button>
+        </div>
+      </div>
+    </div>
+    <div v-if="modalInnerBtn" id="person_search_cancel" onclick="search_cancel()">선택완료</div>
+    <div v-if="!modalInnerBtn" class="flexCenterCenter">
+      <div class="btn_css" onclick="choosePerson(this)">추가하기</div>
+      <div class="btn_css" onclick="goBackList()">뒤로가기</div>
+    </div>
+  </div>
+</div>
+
+<!-- topbar.html -->
+<div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+<!-- topbar.html 끝 -->
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <!-- sidenav.html -->
+      <div th:replace="fragment/sidenav :: sidenav"></div>
+      <!-- sidenav.html 끝 -->
+
+      <!-- sidefooter.html -->
+      <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+      <!-- sidefooter.html 끝 -->
+    </nav>
+  </div>
+
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">책</h1>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            책
+          </div>
+          <div class="card-body">
+            <div id="inputbox">
+              기본정보
+              <div>
+                <input
+                        type="text"
+                        placeholder="표기할 책제목"
+                        class="inBox1"
+                        id="bookTitle"
+                />
+              </div>
+
+              <div>
+                <input type="text" placeholder="부제" class="inBox1" id="bookTitleSub" />
+              </div>
+
+              <div>
+                <input type="text" placeholder="작가" class="inBox1" id="bookWriter"/>
+              </div>
+
+              <div
+                      class="container"
+                      style="
+                      padding-right: 0px;
+                      padding-left: 0px;
+                      width: 95%;
+                      margin: 0 0 0 10px;
+                    "
+              >
+                <img
+                        src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
+                        style="margin: 10px 0 0 0"
+                />
+                <select
+                        class="country"
+                        multiple="true"
+                        style="
+                        width: 100%;
+                        border-top-width: 0px;
+                        border-right-width: 0px;
+                        border-bottom-width: 0px;
+                        border-left-width: 0px;
+                        border: 1px solid rgb(255, 255, 255);
+                      "
+                        id="bookCategory"
+                >
+                  <option value="" disabled hidden>카테고리</option>
+                  <option value="가정">가정</option>
+                  <option value="살림">살림</option>
+                  <option value="건강">건강</option>
+                  <option value="취미">취미</option>
+                  <option value="경제">경제</option>
+                  <option value="경영">경영</option>
+                  <option value="국어">국어</option>
+                  <option value="외국어">외국어</option>
+                  <option value="사전">사전</option>
+                  <option value="대학교재">대학교재</option>
+                  <option value="만화">만화</option>
+                  <option value="라이트노벨">라이트노벨</option>
+                  <option value="사회">사회</option>
+                  <option value="정치">정치</option>
+                  <option value="소설">소설</option>
+                  <option value="시">시</option>
+                  <option value="희곡">희곡</option>
+                  <option value="수험서">수험서</option>
+                  <option value="자격증">자격증</option>
+                  <option value="어린이">어린이</option>
+                  <option value="에세이">에세이</option>
+                  <option value="여행">여행</option>
+                  <option value="역사">역사</option>
+                  <option value="예술">예술</option>
+                  <option value="유아">유아</option>
+                  <option value="인문">인문</option>
+                  <option value="인물">인물</option>
+                  <option value="자기계발">자기계발</option>
+                  <option value="자연과학">자연과학</option>
+                  <option value="잡지">잡지</option>
+                  <option value="전집">전집</option>
+                  <option value="종교">종교</option>
+                  <option value="청소년">청소년</option>
+                  <option value="IT 모바일">IT 모바일</option>
+                  <option value="초등참고서">초등참고서</option>
+                  <option value="중고등참고서">중고등참고서</option>
+                </select>
+              </div>
+
+              <div>
+                <input
+                        type="date"
+                        data-placeholder="출간일"
+                        aria-required="true"
+                        value="{startDateValue}"
+                        className="{styles.selectDay}"
+                        onChange="{StartDateValueHandler}"
+                        required
+                        class="inBox1"
+                        id="bookAtDate"
+                />
+              </div>
+
+              <div>
+                <input type="text" placeholder="페이지" class="inBox1" id="bookPage" />
+              </div>
+
+              <!-- 드롭다운 -->
+              <div>
+                <select name="age" class="inBox1" id="bookAge">
+                  <option value="" disabled selected>연령등급</option>
+                  <option value="전체 이용가">전체 이용가</option>
+                  <option value="12세 이용가">12세 이용가</option>
+                  <option value="15세 이용가">15세 이용가</option>
+                  <option value="청소년 이용불가">청소년 이용불가</option>
+                  <option value="제한 이용가">제한 이용가</option>
+                </select>
+              </div>
+
+              <div>
+                <input type="text" id="bookSummary" placeholder="내용" />
+              </div>
+
+
+
+
+            </div>
+            <div id="inputbox2">
+              <div class="conBox">
+                <div>
+                  출연/제작
+                  <p>
+                    <button
+                            type="button"
+                            onclick="person_search_visible()"
+                            id="Mbtn"
+                    >
+                      인물검색
+                    </button>
+                  </p>
+                </div>
+                <div id="authorBox">
+                  <div class="onePersonSmallBox" v-for="person in itemlist2">
+                    <div hidden class="hiddenBox" v-if="person.perJob != '감독'&&person.perCasting != ''">{{person.perIdx}}({{person.perJob}} | {{person.perCasting}})</div>
+                    <div hidden class="hiddenBox" v-if="person.perJob != '감독'&&person.perCasting == ''">{{person.perIdx}}({{person.perJob}})</div>
+                    <div hidden class="hiddenBox" v-if="person.perJob == '감독'">{{person.perIdx}}({{person.perJob}})</div>
+                    <div class="smallProfileBox">
+                      <img :src=`${person.perPhoto}` class="smallPersonSimg">
+                    </div>
+                    <div class="smallContentBox">
+                      <b>{{person.perName}}</b>
+                      <p v-if="person.perJob != '감독'&&person.perCasting != ''">({{person.perJob}} | {{person.perCasting}})</p>
+                      <p v-if="person.perJob != '감독'&&person.perCasting == ''">({{person.perJob}})</p>
+                      <p v-if="person.perJob == '감독'">({{person.perJob}})</p>
+                    </div>
+                    <div onclick="minusItemlist2(this)" type="button">
+                      <img
+                              class="minus_button"
+                              src="/assets/img/x_icon.png"
+                              alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="conBox">
+                <div class="caBox">
+                  목차
+                  <div class="content2">
+                    <input type="text" id="bookContentIdx" />
+                  </div>
+                </div>
+              </div>
+              <div class="conBox">
+                <div class="caBox">
+                  출판사 제공 책 소개
+                  <div class="content2">
+                    <input type="text" id="bookPubSummary" />
+                  </div>
+                </div>
+              </div>
+              <div id="wgo">
+                <div>구매가능한 곳</div>
+                <div class="wgo2">
+                  <div class="wBox_1">
+                    <div class="wBox2">
+                      <div>
+                        <select
+                                name="platform"
+                                id="platform"
+                                onchange="createOtt(this.value)"
+                                class="vBox3"
+                        >
+                          <option value="" disabled selected>온라인서점</option>
+                          <option value="알라딘">알라딘</option>
+                          <option value="Yes24">Yes24</option>
+                          <option value="교보문고">교보문고</option>
+                        </select>
+                      </div>
+                      <div>
+                        <input
+                                type="text"
+                                placeholder="URL주소"
+                                class="wBox3"
+                                id="vurl"
+                        />
+                      </div>
+                    </div>
+                    <img
+                            onclick="ottVisible()"
+                            id="ott_plus_icon"
+                            src="/assets/img/plus_outline_icon.png"
+                            alt=""
+                    />
+                  </div>
+                  <div class="wBox_2">
+                    <div id="aladin_box">
+                      <img
+                              class="ott_img"
+                              src="https://an2-glx.amz.wtchn.net/images/ex_aladin_logo_square.png"
+                              alt=""
+                      />
+                      <div class="ott_name">알라딘
+                        <input type="hidden" id="aladin_url" value="">
+                      </div>
+                      <div id="aladin_box_X" onclick="delval('aladin_url')">
+                        <img
+                                class="x_icon"
+                                src="/assets/img/x_icon.png"
+                                alt=""
+                        />
+                      </div>
+                    </div>
+                    <div id="yes24_box">
+                      <img
+                              class="ott_img"
+                              src="https://an2-glx.amz.wtchn.net/images/ex_yes24_logo_square.png"
+                              alt=""
+                      />
+                      <div class="ott_name">Yes24
+                        <input type="hidden" id="yes24_url" value=""></div>
+                      <div id="yes24_box_X" onclick="delval('yes24_url')">
+                        <img
+                                class="x_icon"
+                                src="/assets/img/x_icon.png"
+                                alt=""
+                        />
+                      </div>
+                    </div>
+                    <div id="kyobo_box">
+                      <img
+                              class="ott_img"
+                              src="https://an2-glx.amz.wtchn.net/images/ex_kyobo_logo_square.png"
+                              alt=""
+                      />
+                      <div class="ott_name">교보문고
+                        <input type="hidden" id="kyobo_url" value=""></div>
+                      <div id="kyobo_box_X" onclick="delval('kyobo_url')">
+                        <img
+                                class="x_icon"
+                                src="/assets/img/x_icon.png"
+                                alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="conBox2">
+            <div id="po">
+              포스터
+              <span
+                      style="color: red; font-size: smaller; margin: 0 0 0 37%"
+              >*1개의 파일만 등록가능합니다.</span
+              >
+              <div id="poBox">
+                <label for="pobtn">파일 선택 </label>
+                <input
+                        type="file"
+                        accept=".jpg, .jpeg, .png, .gif"
+                        id="pobtn"
+                        onchange="readLink(this);"
+                />
+                <div id="poBox2">
+                  <p class="file">파일 끌어다 추가하기</p>
+                </div>
+              </div>
+            </div>
+            <div id="ba">
+              배경사진
+              <span
+                      style="color: red; font-size: smaller; margin: 0 0 0 37%"
+              >*1개의 파일만 등록가능합니다.</span
+              >
+              <div id="baBox">
+                <label for="babtn">파일 선택 </label>
+                <input
+                        type="file"
+                        accept=".jpg, .jpeg, .png, .gif"
+                        id="babtn"
+                        onchange="readLink1(this);"
+                />
+                <div id="baBox2">
+                  <p class="file">파일 끌어다 추가하기</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div id="MBox">
+          <button id="btn1 " onclick="sendit()">등록하기</button>
+          <button id="btn2" onclick="location.href='/contents/book'">취소하기</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script defer src="/js/Book_Write.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+></script>
+<script src="/js/scripts.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        crossorigin="anonymous"
+></script>
+<script src="/assets/demo/chart-area-demo.js"></script>
+<script src="/assets/demo/chart-bar-demo.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+        crossorigin="anonymous"
+></script>
+<script src="/js/datatables-simple-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,950 @@
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  display: none;
+}
+
+/* ---------------------------------------------------- */
+
+select option[value=""][disabled] {
+  display: none;
+}
+
+select {
+  width: 200px; /* 원하는 너비설정 */
+  font-family: inherit; /* 폰트 상속 */
+  background: url(../img/watch5.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  border: 1px solid #999;
+  border-radius: 0px; /* iOS 둥근모서리 제거 */
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  background-size: contain;
+}
+
+select:hover {
+  background: url(../image/watch6.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+select:checked {
+  background: url(../image/watch6.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+select:active {
+  background: url(../image/watch6.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+select:visited {
+  background: url(../image/watch6.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+/* ----------------------------------------------------- */
+/* 인물검색 결과 틀 박스 효과 */
+.onePersonBigBox{
+  display: flex;
+  width: 580px;
+  height: 100px;
+  margin: 8px auto;
+  border-bottom: 1px solid darkgray;
+}
+
+
+.profileBox{
+  width: 20%;
+  height: 97%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+}
+
+.appearBoxes{
+  display: flex;
+  justify-content: left;
+}
+
+.appearBoxes > div{
+  background-color: darkgray;
+  border-radius: 5px;
+  margin: auto 5px;
+  padding: 3px;
+}
+
+.contentBox{
+  width: 60%;
+  overflow: hidden;
+}
+
+.chooseBtnBox{
+  width: 20%;
+  padding-left: 50px;
+}
+
+.chooseBtn{
+  margin: 40px auto;
+}
+
+.personSimg{
+  position: initial;
+  width: 100px;
+  height: 90px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+
+/* 인물검색 모달창 */
+#person_search_modal {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(209, 209, 209, 0.4);
+
+}
+
+#person_search_modal.visible {
+  display: block;
+  z-index: 1000;
+}
+
+#person_modal_bigbox {
+  background-color: rgb(209, 209, 209);
+  width: 600px;
+  height: 545px;
+  position: relative;
+  left: 40%;
+  top: 25%;
+  border-radius: 5px;
+}
+
+.modal_big_title {
+  color: white;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#modal_search_bar {
+  position: relative;
+  left: 4px;
+  width: 98.5%;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  margin: 5px auto;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#modal_search_result {
+  width: 98.5%;
+  height: 403px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin: 3px auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#person_search_cancel {
+  color: white;
+  width: 20%;
+  height: 35px;
+  margin: 6px auto;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ----------------------------------------------------- */
+
+#actor {
+  width: 200px; /* 원하는 너비설정 */
+  font-family: inherit; /* 폰트 상속 */
+  background: url(../image/watch.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  border: 1px solid #999;
+  border-radius: 0px; /* iOS 둥근모서리 제거 */
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  background-size: contain;
+}
+
+#actor:hover {
+  background: url(../image/watch4.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+#actor:checked {
+  background: url(../image/watch4.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+#actor:active {
+  background: url(../image/watch4.png) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+  background-size: contain;
+}
+
+/* -------------------------------------- */
+.container {
+  margin: 5px 10px;
+  border: 1px solid rgb(255, 255, 255);
+  width: 95%;
+}
+
+.selection {
+  right: 10px;
+}
+
+.country {
+  width: 250px !important;
+  margin: auto -15px !important;
+  position: relative;
+  width: 300px;
+}
+.select2
+.select2-container
+.select2-container--default
+.select2-container--below {
+  margin: 5px 10px;
+  border: 1px solid rgb(255, 255, 255) !important;
+  width: 95% !important;
+}
+
+.country .select2-hidden-accessible {
+  margin: 5px 10px;
+  border: 1px solid rgb(255, 255, 255);
+  width: 95% !important;
+}
+
+img {
+  position: absolute;
+  width: 20px;
+  margin: 0 auto;
+  left: 44.5%;
+  z-index: 1;
+}
+/* -------------------------------------- */
+#Mbtn {
+  width: 200px;
+  height: 30px;
+  background: url(/image/watch.png) no-repeat 95% 50% #9a9a9a;
+  background-size: 20px;
+  border: 1px solid rgb(255, 255, 255);
+  margin: 5px 10px;
+  color: white;
+}
+
+#authorBox {
+  margin: 5px 10px;
+  width: 95%;
+  height: 115px;
+  border: 1px solid rgb(228, 223, 223);
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------- */
+.card1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgb(228, 223, 223);
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 250px;
+  align-items: center;
+}
+
+.file-input1 {
+  position: relative;
+
+  background-color: rgb(228, 223, 223);
+  padding: 5px;
+  border-radius: 8%;
+  top: 5px;
+}
+
+.file-input2 {
+  border: none;
+  background-color: rgb(228, 223, 223);
+  /* right: 20%; */
+}
+
+.image-upload {
+  flex-direction: column;
+  min-width: 0;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+  align-items: center;
+  right: 10%;
+}
+
+#resultFile {
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgb(228, 223, 223);
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 150px;
+  overflow: auto;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#mbox {
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgb(228, 223, 223);
+  border-radius: 0.25rem;
+  width: 350px;
+  height: 290px;
+  align-items: center;
+}
+
+.file {
+  margin: auto 0;
+  width: 250px;
+  opacity: 0.5;
+}
+/* ---------------------------------------- */
+
+.card {
+  display: flex;
+  width: 100%;
+}
+
+#inputbox,
+#inputbox2 {
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-body {
+  display: flex;
+  padding: 5px !important;
+}
+#bookSummary {
+  margin: 0 auto 0 10px;
+  width: 95%;
+  height: 200px;
+  border: 1px solid rgb(228, 223, 223);
+  padding-left: 10px;
+}
+.total_size_kb {
+  display: none;
+}
+#blank_container {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#total_file_info {
+  position: relative;
+  top: 8px;
+  left: 20px;
+  width: 130px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#margin_little {
+  margin: 10px;
+  width: 85%;
+  overflow: hidden;
+}
+#inputFile {
+  position: absolute;
+  width: auto;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+#blank_container label {
+  display: inline-block;
+  height: 35px;
+  padding: 5px 15px;
+  border-radius: 3px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #c4c4c4;
+  cursor: pointer;
+  /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+/*------------------------------------------------*/
+/*구매가능한곳*/
+#wgo {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+#wgo > div:first-child {
+  margin-left: 10px;
+}
+
+.wgo2 {
+  margin: 0 auto 0 0;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+}
+
+.wBox_2 {
+  margin: 10px;
+  border: 1px solid rgb(228, 223, 223);
+  width: 50%;
+  height: 130px;
+  overflow: auto;
+}
+
+.wBox_1 {
+  margin: 10px;
+  border: 1px solid rgb(228, 223, 223);
+  width: 50%;
+  height: 130px;
+  padding-right: 10px;
+}
+
+.wBox2 {
+  margin: 10px;
+  border: 1px solid rgb(228, 223, 223);
+  width: 95%;
+  height: 80px;
+  padding-top: 15px;
+  padding-right: 10px;
+}
+
+.wBox3 {
+  margin: 5px 10px;
+  width: 95%;
+  border: 1px solid rgb(228, 223, 223);
+  padding: 1px 10px;
+}
+
+#plus_img {
+  position: relative;
+}
+#minus_img {
+  position: relative;
+}
+
+#ott_plus_icon {
+  position: relative;
+}
+
+#only_flex_box {
+  display: flex;
+  justify-content: center;
+}
+
+#aladin_box {
+  display: none;
+  margin: 3px 2px;
+}
+
+#aladin_box.visible {
+  display: flex;
+}
+
+#yes24_box {
+  display: none;
+  margin: 3px 2px;
+}
+
+#yes24_box.visible {
+  display: flex;
+}
+
+#kyobo_box {
+  display: none;
+  margin: 3px 2px;
+}
+
+#kyobo_box.visible {
+  display: flex;
+}
+
+.ott_img {
+  position: static;
+  margin: initial;
+  width: 40px;
+}
+
+.ott_name {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  width: 80%;
+  margin: 0 4px 0 7px;
+  border-bottom: 1px solid rgb(188, 188, 188);
+}
+
+.x_icon {
+  position: static;
+  margin: initial;
+  width: 20px;
+}
+
+/* ------------------------------------------------- */
+#vBox {
+  border: 1px solid rgb(228, 223, 223);
+  width: 100%;
+  height: 250px;
+  overflow: auto;
+}
+
+.vBox1 {
+  margin: 10px;
+  border: 1px solid rgb(228, 223, 223);
+  width: 95%;
+  height: 90px;
+}
+
+#conBox {
+  display: flex;
+}
+
+.conzone {
+  margin: 10px;
+  width: 100%;
+  overflow: auto;
+}
+
+.vBox2 {
+  margin: 5px 10px;
+  width: 95%;
+  border: 1px solid rgb(228, 223, 223);
+}
+
+.inBox1 {
+  margin: 5px 10px;
+  width: 95%;
+  border: 1px solid rgb(228, 223, 223);
+  padding: 5px 10px;
+}
+
+.selectDay {
+  margin: 5px 10px;
+  width: 95%;
+  border: 1px solid rgb(228, 223, 223);
+}
+#platform{
+  width:95%;
+  margin-left: 10px;
+  padding: 1px 10px;
+}
+/* -------------------------------- */
+.conBox2 {
+  display: flex;
+  margin: 0 auto;
+  height: 100%;
+}
+
+#po,
+#ba {
+  width: 405px;
+}
+
+#poBox {
+  margin: 5px 10px;
+  width: 95%;
+  height: 150px;
+  border: 1px solid rgb(228, 223, 223);
+}
+#pobtn {
+  background: 1px solid rgb(228, 223, 223);
+  color: #fff;
+  position: absolute;
+  width: auto;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+#poBox label {
+  display: inline-block;
+  height: 35px;
+  padding: 5px 15px;
+  border-radius: 3px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #9a9a9a;
+  cursor: pointer;
+  margin: 10px 20px;
+  border: none;
+}
+
+#poBox2 {
+  margin: 1px auto;
+  width: 320px;
+  height: 80px;
+  border: 1px solid rgb(228, 223, 223);
+}
+
+#baBox {
+  margin: 5px 10px;
+  width: 95%;
+  height: 150px;
+  border: 1px solid rgb(228, 223, 223);
+}
+
+#babtn {
+  background: 1px solid rgb(228, 223, 223);
+  color: #fff;
+  position: absolute;
+  width: auto;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+#baBox label {
+  display: inline-block;
+  height: 35px;
+  padding: 5px 15px;
+  border-radius: 3px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #9a9a9a;
+  cursor: pointer;
+  margin: 10px 20px;
+  border: none;
+}
+
+#baBox2 {
+  margin: 1px auto;
+  width: 320px;
+  height: 80px;
+  border: 1px solid rgb(228, 223, 223);
+}
+
+#MBox {
+  display: flex;
+  justify-content: center;
+  margin:10px;
+}
+
+#btn1,
+#btn2 {
+  margin: 0 5px;
+  border: 0.5px solid rgb(228, 223, 223);
+}
+
+#plusbox {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+
+#plus {
+  font-weight: 800;
+  border-radius: 50%;
+  border: 1px solid rgb(228, 223, 223);
+}
+
+/* --------------------------------------- */
+.caBox {
+  width: 100%;
+}
+
+.content2 {
+  width: 100%;
+  margin: 0 0 0 10px;
+}
+
+#bookContentIdx {
+  width: 95%;
+  height: 100px;
+  overflow: auto;
+  border: 1px solid rgb(228, 223, 223);
+  padding-left: 10px;
+}
+#bookPubSummary {
+  width: 95%;
+  height: 100px;
+  overflow: auto;
+  border: 1px solid rgb(228, 223, 223);
+  padding-left: 10px;
+}
+/* 인물검색 결과 틀 박스 효과 */
+.onePersonBigBox{
+  display: flex;
+  width: 580px;
+  height: 100px;
+  margin: 8px auto;
+  border-bottom: 1px solid darkgray;
+}
+
+.onePersonBigBox.none{
+  display: none;
+  border-bottom: none;
+}
+
+.profileBox{
+  width: 20%;
+  height: 97%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+}
+
+.appearBoxes{
+  display: flex;
+  justify-content: left;
+}
+
+.appearBoxes > div{
+  background-color: darkgray;
+  border-radius: 5px;
+  margin: auto 5px;
+  padding: 3px;
+}
+
+.contentBox{
+  width: 60%;
+  overflow: hidden;
+}
+
+.chooseBtnBox{
+  width: 25%;
+  padding-left: 30px;
+}
+
+.chooseBtn{
+  margin: 40px auto;
+}
+
+.personSimg{
+  position: initial;
+  width: 100px;
+  height: 90px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+
+/* 인물검색 모달창 */
+#person_search_modal {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(209, 209, 209, 0.4);
+
+}
+
+#person_search_modal.visible {
+  display: block;
+  z-index: 1000;
+}
+
+#person_modal_bigbox {
+  background-color: rgb(209, 209, 209);
+  width: 600px;
+  height: 545px;
+  position: relative;
+  left: 40%;
+  top: 25%;
+  border-radius: 5px;
+}
+
+.modal_big_title {
+  color: white;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#modal_search_bar {
+  position: relative;
+  left: 4px;
+  width: 98.5%;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  margin: 5px auto;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#modal_search_result {
+  width: 98.5%;
+  height: 403px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin: 3px auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#person_search_cancel {
+  color: white;
+  width: 20%;
+  height: 35px;
+  margin: 6px auto;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btn_css{
+  color: white;
+  width: 100px;
+  height: 35px;
+  margin: 6px auto;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.flexCenterCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg-dark{
+  background-color: #343a40;
+}
+label{
+  border: solid 1px black;
+}
+
+#Mbtn{
+  border: solid 1px black;
+}
+
+#btn1, #btn2{
+  border: solid 1px black;
+}
+
+/* 선택된 인물박스 CSS */
+.onePersonSmallBox{
+  display: flex;
+  align-items: center;
+  width: 45%;
+  height: 70px;
+  margin: 5px 10px;
+}
+
+.smallProfileBox{
+  width: 38%;
+  height: 97%;
+}
+
+.smallPersonSimg{
+  position: initial;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.smallContentBox{
+  width: 50%;
+  overflow: hidden;
+}
+
+.smallContentBox > b{
+  font-size: 16px;
+}
+
+.smallContentBox > p{
+  font-size: 12px;
+}
+
+.minus_button{
+  position: relative;
+  top: -10px;
+}
+
+.smallProfileBox{
+  width: 38%;
+  height: 97%;
+}
+
+.smallPersonSimg{
+  position: initial;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.smallContentBox{
+  width: 50%;
+  overflow: hidden;
+}
+
+.smallContentBox > b{
+  font-size: 16px;
+}
+
+.smallContentBox > p{
+  font-size: 12px;
+}
+
+.minus_button{
+  position: relative;
+  top: -10px;
+}

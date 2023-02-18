@@ -1,0 +1,95 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<div  th:fragment="sidenav" class="sb-sidenav-menu">
+  <div class="nav">
+
+    <!-- 고객관리 -->
+    <div class="sb-sidenav-menu-heading">고객관리</div>
+    <a class="nav-link" href="/notice">
+      <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+      공지사항
+    </a>
+    <a class="nav-link" href="/qna">
+      <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+      Q&A
+    </a>
+
+
+
+    <div class="sb-sidenav-menu-heading">서비스관리</div>
+    <!-- 컨텐츠관리 -->
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+      <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+      컨텐츠
+      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+    </a>
+    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+      <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="/contents/movie">영화</a>
+        <a class="nav-link" href="/contents/tv">TV</a>
+        <a class="nav-link" href="/contents/book">책</a>
+        <a class="nav-link" href="/contents/webtoon">웹툰</a>
+      </nav>
+    </div>
+
+
+    <!-- 코멘트관리 -->
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
+      <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+      코멘트
+      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+    </a>
+
+    <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+      <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="/comment/search_list">코멘트조회</a> <!-- 조회,수정,경고 -->
+        <a class="nav-link" href="/comment/report_page">신고함</a><!-- 읽기,경고()-->
+      </nav>
+    </div>
+
+
+    <!-- 인물관리 -->
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
+      <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+      인물
+      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+    </a>
+
+    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+      <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="/character_manage">인물관리</a>
+      </nav>
+    </div>
+
+
+
+    <div class="sb-sidenav-menu-heading">회원관리</div>
+    <!-- 회원관리 -->
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
+      <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+      회원
+      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+    </a>
+    <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+      <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="/member">회원관리</a>
+
+      </nav>
+    </div>
+
+
+
+
+    <!-- 광고관리 -->
+    <div class="sb-sidenav-menu-heading">광고관리</div>
+    <a class="nav-link" href="/advertisement">
+      <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+      광고
+    </a>
+
+
+
+  </div>
+</div>
+</html>

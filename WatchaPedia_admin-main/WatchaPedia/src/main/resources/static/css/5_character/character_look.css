@@ -1,0 +1,71 @@
+#container{
+    margin: 20px 0px 20px 30px;
+    height: 80px;
+    width: 80px;
+    border: 1px solid rgb(209, 208, 208);
+}
+img{
+    height: 80px;
+    width: 80px;
+    border: 1px solid rgb(210, 209, 209);
+    margin: 25px 0px 20px 30px;
+    border-radius: 10px;
+}
+.push{
+    text-align: center;
+}
+#ch_fix{
+  text-align: center;
+}
+#ch_list{
+    text-align: center;
+}
+#name{
+    height: 25px;
+    width: 200px;
+    top: 5px;
+    margin-left: 30px;
+    border: none;
+    font-size: 25px;
+    
+}
+#job{
+    color: grey;
+    border: none;
+    height: 30px;
+    width: 200px;
+    top: 5px;
+    margin-left: 30px;
+    font-size: 5px;
+}
+#bio{
+    width: 90%;
+    top: 5px;
+    margin-left: 30px;
+    border: none;
+    font-size: 17px;
+    
+}
+#bio_content{
+    height: 500px;
+    width: 900px;
+    top: 5px;
+    margin-left: 30px;
+    border: none;
+    font-size: 20px;
+    
+}
+#ch_fix{
+    border: none;
+    margin: 0px 0px 10px;
+    padding:5px 15px;
+}
+#ch_list{
+    border: none;
+    margin: 0px 0px 10px;
+    padding:5px 15px;
+}
+#biotitle{
+    margin-left:30px;
+    font-size: 25px;
+}

@@ -1,0 +1,78 @@
+#searchBackBtn { text-align: center; border-style: none;}
+
+#search_comment_photo { width: 25px; height: 25px; border-radius: 50px;}
+form > div:nth-child(3) { font-size: 80%; font-size: large;}
+#comment_movie_poster { width: 10%; float:right; }
+
+#commentdetail { width: 100%; margin-bottom: 3%;}
+.movielikereply { font-size: 15px; margin-bottom: 3.5%;}
+
+.commText{
+    width: 90%;
+    font-size: 18px;
+}
+
+#like_reply{
+    margin-bottom: 2%;
+}
+
+
+#room { width: 1.2%;}
+#like_reply {
+    display: flex;
+    justify-content: flex-start; }
+#photoiddetail {
+    padding-bottom: 7px;
+    font-size: 20px;
+}
+#commRegDate{
+    margin: 10px 15px;
+}
+
+#cocomment {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+button{
+    margin-bottom: 20px;
+    padding: 5px 20px;
+}
+
+#info {
+    display: flex;
+
+    /* id 뱃찌 text 따봉 같이 묶여 있음 padding으로 간격 잡기 */
+}
+#abc {
+    margin: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+
+}
+#date {
+    font-size: 14px;
+    padding: 3px;
+    margin-right: 10px;
+    color: rgb(130, 129, 129);
+}
+
+#down {
+    flex-wrap: wrap;
+}
+
+#text {
+    margin: 0px 0px 10px;
+}
+.small_flex {
+    display: flex;
+}
+
+button{
+    border: solid 1px;
+}
+
+a {
+    text-decoration: none;
+}

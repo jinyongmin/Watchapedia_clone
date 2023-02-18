@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<thlogic>
+<!--    <attr sel="#account-table" th:object="${adminUser}">-->
+    <attr sel="#account-table">
+            <attr sel="#admin-adminIdx" th:text=" ${adminUser.adminIdx}"/>
+            <attr sel="#admin-name" th:text=" ${adminUser.adminName}"/>
+            <attr sel="#admin-number" th:text="${adminUser.adminNumber}"/>
+            <attr sel="#admin-type" th:text="${adminUser.adminType}"/>
+            <attr sel="#admin-id" th:text="${adminUser.adminId}"/>
+    </attr>
+    <attr sel="#infoUpdate" th:href="@{'/hradmin/updateaccount/'+${adminUser.adminIdx}}"/>
+</thlogic>

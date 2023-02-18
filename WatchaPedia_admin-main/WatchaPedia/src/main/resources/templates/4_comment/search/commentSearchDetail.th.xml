@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#CommentBox" th:object="${comment}">
+        <attr sel="#comment_movie_poster" th:src="${comment.commPosterUrl}"/>
+        <attr sel=".commUsername" th:text="${comment.commName}"></attr>
+        <attr sel="#commRegDate" th:text="'작성 일자 : '+${#temporals.format(comment.commRegDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+        <attr sel=".commText" th:text="${comment.commTitle}"/>
+        <attr sel=".commDetext" th:text="''+${comment.commText}"/>
+        <attr sel=".commUserIdx" th:text="'좋아요 : '+${#lists.size(comment.likeList)}"/>
+        <attr sel=".commContentIdx" th:text="'댓글 : '+${#lists.size(comment.recommentList)}"/>
+    </attr>
+
+    <attr sel="#cocomment" th:each="recomm: ${recomment}">
+        <attr sel="#userid" th:text="${recomm.user.userName}"></attr>
+        <attr sel="#text" th:text="${recomm.recommText}"></attr>
+        <attr sel="#date" th:text="${recomm.regDateAgo}"></attr>
+        <attr sel=".relikeNum" th:text="${#lists.size(recomm.relikeList)}"></attr>
+
+    </attr>
+
+</thlogic>

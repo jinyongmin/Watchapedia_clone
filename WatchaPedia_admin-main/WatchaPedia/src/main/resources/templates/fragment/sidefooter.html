@@ -1,0 +1,8 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<div th:fragment="sidefooter(adminId, adminName)" class="sb-sidenav-footer">
+  <div class="small">Logged in as:</div>
+  <span th:text="${adminId}"/>(<span th:text="${adminName}"/>)
+</div>
+</html>

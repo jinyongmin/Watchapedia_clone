@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#user-table" th:remove="all-but-first">
+        <attr sel=".user-tr" th:each="user : ${users}">
+            <attr sel="#user-idx/a" th:text="${user.userIdx}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-id/a" th:text="${user.userType=='인플루언서' ? user.userName + '✓' : user.userName}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-status/a" th:text="${user.userStatus}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-release/a" th:date="${user.userReleaseDate}" th:text="*{#temporals.format(user.userReleaseDate, 'yyyy-MM-dd')}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-caution/a" th:text="${user.userCautionCnt}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-warning/a" th:text="${user.userWarningCnt}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-suspension/a" th:text="${user.userSuspensionCnt}" th:href="@{'/member/'+${user.userIdx}}"/>
+        </attr>
+    </attr>
+</thlogic>

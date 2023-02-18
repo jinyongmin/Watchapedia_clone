@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Dashboard - SB Admin</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+          rel="stylesheet"
+  />
+  <link href="/css/styles.css" rel="stylesheet" />
+  <link href="/css/4_comment/reportdetail_reply.css" rel="stylesheet" />
+  <script
+          src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+          crossorigin="anonymous"
+  ></script>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script defer src="/js/reportdetail_reply.js"></script>
+  <style>
+    body{
+      font-family: 'LINESeedKR-Bd';
+    }
+    .modal-wrap {
+      position: fixed;
+      background: rgba(37, 37, 37, 0.4);
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 5px;
+      z-index: 2;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    #username{
+      margin:10px;
+    }
+
+    #blinder_btn.selected {
+      opacity: 0.2;
+    }
+    #spoiler_btn.selected {
+      opacity: 0.2;
+    }
+    #noproblem_btn.selected {
+      opacity: 0.2;
+    }
+
+    .modal1 {
+      width: 250px;
+      background: #fff;
+      border-radius: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .modal1 button {
+      background: none;
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      height: 50px;
+      color: rgb(226, 59, 87);
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    .modal1 button:first-child {
+      border-right: 1px solid #eee;
+    }
+
+    .modal1 button:hover {
+      background: #e1eef6;
+    }
+
+    .head_notice {
+      padding-top: 17px;
+      font-size: 20px;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
+    .comment {
+      padding: 0 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .btnBox {
+      text-align: center;
+    }
+    .button_box {
+      margin: 0 5px;
+    }
+
+    #report_result {
+      display: none;
+    }
+
+    #report_result.visible {
+      display: block;
+    }
+    #big_window {
+      position: relative;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body class="sb-nav-fixed">
+<div>
+  <!-- 모달 블라인드 -->
+  <div class="modal-wrap" v-if="blinder">
+    <div class="modal1">
+      <div class="head_notice">알림</div>
+      <div class="comment">해당 코멘트를 블라인드 처리 하시겠습니까?</div>
+      <div class="button-wrap">
+        <button
+                @click="blinder = !blinder"
+                id="blind_ok"
+                onclick="blind_result()"
+        >
+          확인
+        </button>
+        <button @click="blinder = !blinder" class="cancel">취소</button>
+      </div>
+    </div>
+  </div>
+  <!-- 모달 스포일러 -->
+  <div class="modal-wrap" v-if="spoiler">
+    <div class="modal1">
+      <div class="head_notice">알림</div>
+      <div class="comment">
+        해당 코멘트에 스포일러 커버를 씌우시겠습니까?
+      </div>
+      <div class="button-wrap">
+        <button
+                @click="spoiler = !spoiler"
+                class="ok"
+                onclick="spoiler_result()"
+        >
+          확인
+        </button>
+        <button @click="spoiler = !spoiler" class="cancel">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 문제없음 -->
+  <div class="modal-wrap" v-if="noproblem">
+    <div class="modal1">
+      <div class="head_notice">
+        알림</div>
+        <div class="comment">해당 댓글을 문제없음 처리 하시겠습니까?</div>
+        <div class="button-wrap">
+          <button
+                  @click="noproblem = !noproblem"
+                  id="noproblem_ok"
+                  onclick="noproblem_result()"
+          >
+            확인
+          </button>
+          <button @click="noproblem = !noproblem" class="cancel">
+            취소
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- topbar.html -->
+<div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+<!-- topbar.html 끝 -->
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <!-- sidenav.html -->
+      <div th:replace="fragment/sidenav :: sidenav"></div>
+      <!-- sidenav.html 끝 -->
+
+      <!-- sidefooter.html -->
+      <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+      <!-- sidefooter.html 끝 -->
+    </nav>
+  </div>
+  <div id="layoutSidenav_content">
+    <!-- 모달끝-->
+    <main id="big_window">
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">신고함</h1>
+        <div class="row"></div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i
+            ><!--이미지-->
+            신고함
+          </div>
+          <div class="card-body">
+            <div class = "reported_comment">
+              <div id="hiddenIdx" hidden></div>
+              <div id="hiddenSessionAdmin" hidden></div>
+              <p id="userinformation">
+                                        <span id="profilepic">
+                                            <img class="profilepic" src="data:image/jpeg;base64,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" alt="기본프로필이미지">
+                                        </span>
+                <span id="username">
+                                            피신고자 이름
+                                        </span>
+                <!-- 인플루언서일경우 아래생성 -->
+                <span id="influencer">
+                                            ✅
+                                        </span>
+                <span id="date">
+                                            신고일자
+                                        </span>
+              </p>
+              <p id="users_cautionCnt">
+                유저의 제제현황
+              </p>
+
+              <div id="comment_main">
+                <p>문제의 코멘트 내용 자리</p>
+              </div>
+            </div>
+
+
+
+            <!-- 버튼누를시 생성 -->
+            <div class="report_result" th:if="${report.status} != '대기중'">
+              <hr>
+              <p>
+                <span>처리내용 : </span>
+                <span class="processResult">문제없음 처리</span>
+              </p>
+              <p>
+                <span>처리일시 : </span>
+                <span class="processDate">2022-05-26 오후 11:24 </span>
+              </p>
+              <p>
+                <span>관리자 : </span>
+                <span class="adminId">이재원</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기존 버튼-->
+        <div class="btnBox">
+          <button
+                  class="button_box"
+                  @click="blinder = !blinder"
+                  id="blinder_btn"
+                  th:classappend="${report.status == '블라인드' ? 'selected' : ''}"
+          >
+            블라인드
+          </button>
+          <button
+                  class="button_box"
+                  @click="spoiler = !spoiler"
+                  id="spoiler_btn"
+                  th:classappend="${report.status == '스포일러' ? 'selected' : ''}"
+          >
+            스포일러
+          </button>
+          <button
+                  class="button_box"
+                  @click="noproblem= !noproblem"
+                  id="noproblem_btn"
+                  th:classappend="${report.status == '문제없음' ? 'selected' : ''}"
+          >
+            문제없음
+          </button>
+          <button class="button_box" onclick="location.href='/comment/report_page'">
+            목록으로
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<!-- nav다음 div 끝 -->
+
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        blinder: false,
+        spoiler: false,
+        noproblem: false,
+      };
+    },
+  }).mount(".sb-nav-fixed");
+</script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+></script>
+<script src="/js/scripts.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        crossorigin="anonymous"
+></script>
+<script src="/assets/demo/chart-area-demo.js"></script>
+<script src="/assets/demo/chart-bar-demo.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+        crossorigin="anonymous"
+></script>
+<script src="/js/datatables-simple-demo.js"></script>
+</body>
+</html>

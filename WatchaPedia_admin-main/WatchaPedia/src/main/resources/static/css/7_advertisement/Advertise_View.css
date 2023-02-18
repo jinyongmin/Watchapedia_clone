@@ -1,0 +1,24 @@
+#box1{
+    border:0.5px solid rgb(241, 241, 241);
+}
+#box2{
+    border:0.5px solid rgb(241, 241, 241);
+    width: 100%; height: 300px;
+}
+
+#btn0{
+    margin: 2px;
+    display: flex;
+    justify-content: end;
+}
+
+.btn1{
+    border: solid 1px;
+    width: 80px;
+    padding:3px 5px;
+    margin: 5px;
+
+}
+#ntcbtn{
+    color:white;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/1_notice/Notice_Edit.css" rel="stylesheet" />
+    <script
+            src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+            crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--These jQuery libraries for select2 need to be included-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css"
+    />
+    <script>
+        $(document).ready(function () {
+            //Select2
+            $(".country").select2({
+                maximumSelectionLength: 10,
+
+            });
+        });
+    </script>
+    <style>
+        #ntcText{
+            width : 500px;
+            height: 400px;
+            resize: none;
+        }
+        #ntcBtnText{
+            width : 450px;
+            height: 50px;
+        }
+    </style>
+
+</head>
+<body class="sb-nav-fixed">
+<!-- topbar.html -->
+<div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+<!-- topbar.html 끝 -->
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <!-- sidenav.html -->
+            <div th:replace="fragment/sidenav :: sidenav"></div>
+            <!-- sidenav.html 끝 -->
+
+            <!-- sidefooter.html -->
+            <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+            <!-- sidefooter.html 끝 -->
+        </nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">공지사항</h1>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        공지사항
+                    </div>
+                    <form action="/noticeOk"  id="frm" method="post" enctype="multipart/form-data">
+                        <input type="text" class="fo" th:value="${notice.ntcTitle}" name="ntcTitle" id = "ntcTitle"  placeholder="제목을 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='제목'" >
+
+                        <div class="centerdiv">
+                            <p>
+                                <span>사진</span>
+
+                            <div class="conBox2">
+                                <div id="po">
+                                    <div id="poBox">
+                                        <label for="pobtn">파일 선택 </label>
+                                        <!--당겼을때 출력-->
+                                        <input
+                                                type="file"
+                                                accept=".jpg, .jpeg, .png, .gif"
+                                                id="pobtn"
+                                                onchange="readLink(this);"
+                                        />
+                                        <div id="poBox2">
+                                            <p class="file">파일 끌어다 추가하기</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>
+                                <span>내용</span>
+                            </p>
+                            <p><textarea id="ntcText" th:text="${notice.ntcText}" name="ntcText" placeholder="공지할 내용을 입력해 주세요."> </textarea></p>
+                            <p>
+                                <span>버튼</span>
+                            </p>
+                            <p>
+                                <input type="text" name="ntcBtnText" th:value="${notice.ntcBtnText}" id="ntcBtnText" />
+                                <input id="spoid" type="color" value="#FE3F6F"/></p>
+                            <input type="text" name="ntcBtnColor" id="ntcBtnColor" hidden/>
+                            <p>
+                                <span>링크</span>
+                            </p>
+                            <p>
+                                <input type="text"  th:value="${notice.ntcBtnLink}" id="ntcBtnLink">
+                            </p>
+                        </div>
+                    </form>
+                    <div id="btn0">
+                        <button class='butn' id="btn1" th:onclick="|submitCheck(${notice.ntcIdx})|">수정하기</button>
+                        <button class='butn' id="btn2" onclick="location.href='/notice'">취소하기</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+</div>
+
+
+
+
+<script defer src="/js/Notice_Edit.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        crossorigin="anonymous"
+></script>
+<script src="/assets/demo/chart-area-demo.js"></script>
+<script src="/assets/demo/chart-bar-demo.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+        crossorigin="anonymous"
+></script>
+<script src="/js/datatables-simple-demo.js"></script>
+
+</body>
+</html>

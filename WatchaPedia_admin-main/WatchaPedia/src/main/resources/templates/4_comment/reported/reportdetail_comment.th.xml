@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#username" th:text="${report.user.userName}"/>
+    <attr sel="#influencer" th:if="${report.user.userType == '인플루언서'}"/>
+    <attr sel="#date" th:text="${#temporals.format(report.reportRegDate, 'yyyy-MM-dd')}"/>
+    <attr sel="#users_cautionCnt" th:text="'(해당 유저의 규제 이력'+'주의 : ' + ${report.user.userCautionCnt} + ', 경고 : ' + ${report.user.userWarningCnt} + ', 정지 : ' + ${report.user.userSuspensionCnt} + ')'"/>
+    <attr sel="#comment_main" th:text="${report.reportText}"/>
+    <attr sel=".processResult" th:text="${report.status}"/>
+    <attr sel=".processDate" th:text="${report.answerDate}"/>
+    <attr sel=".adminId" th:text="${report.answerAdminId}"/>
+</thlogic>

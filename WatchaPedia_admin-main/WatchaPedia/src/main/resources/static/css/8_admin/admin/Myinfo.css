@@ -1,0 +1,74 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    text-align: center;
+    width: 95%;
+    height: 400px;
+    margin:0 auto ;
+    align-items: center;
+
+  }
+
+  .info_table{
+    position: absolute;
+    top: 20%;
+    border-collapse: collapse;
+  }
+
+  table {
+    width : 600px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .itr{
+    border : 1px solid black;
+    border-collapse: collapse;
+
+
+  }
+  .itd{
+    border : 1px solid black;
+    border-collapse: collapse;
+
+  }
+  .ith{
+    border : 1px solid black;
+    width: 150px;
+    background-color: #ddd;
+  }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    text-align: center;
+    width: 98%;
+    height: 400px;
+    margin:0 auto ;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .ok_btn{
+
+    padding-top: 25px;
+    box-shadow: none;
+  }
+  H2{
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+button{
+    border: solid 1px;
+}

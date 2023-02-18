@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="tbody" th:remove="all-but-first">
+        <attr sel="tr[0]" th:each="qna : ${qnas}">
+            <attr sel="td.qna-idx/a" th:text="${qna.qnaIdx}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+            <attr sel="td.qna-text/a"  th:text="${qna.qnaText}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+            <attr sel="td.qna-userid/a" th:text="${qna.qnaUserid}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+            <attr sel="td.qna-auserid/a" th:text="${qna.qnaName}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+            <attr sel="td.qna-regdate/a" th:date="${qna.qnaRegDate}" th:text="*{#temporals.format(qna.qnaRegDate, 'yyyy-MM-dd HH:mm:ss')}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+            <attr sel="td.qna-status/a" th:text="${qna.qnaStatus}" th:href="${qna.qnaStatus=='답변완료'}? '/qna/'+${qna.qnaIdx}+'/qnaview' : '/qna/'+${qna.qnaIdx}"/>
+        </attr>
+    </attr>
+</thlogic>
+
+

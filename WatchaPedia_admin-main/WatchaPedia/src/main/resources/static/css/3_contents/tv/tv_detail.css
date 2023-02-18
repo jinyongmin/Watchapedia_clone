@@ -1,0 +1,9 @@
+#MBox{
+    display: flex;
+    justify-content: center;
+}
+.btn0{
+    border:0.5px solid rgb(241, 241, 241); 
+    width: 80px;
+    margin: 0 8px;
+}

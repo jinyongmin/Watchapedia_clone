@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#QnABox" th:object="${qna}">
+        <attr sel=".qna-text" th:text="'문의 내용 : '+${qna.qnaText}"/>
+        <attr sel=".qna-userid" th:text="'사용자 : '+${qna.qnaUserid}"/>
+        <attr sel="#qna-reg-date" th:text="'문의 날짜 : '+${#temporals.format(qna.qnaRegDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+        <attr sel=".qna-file" th:text="'첨부파일 : '+${qna.qnaFile}"/>
+        <attr sel=".qna-atext" th:text="'설명 : '+${qna.qnaAtext}"/>
+        <attr sel=".qna-status" th:text="'알림 이메일 주소 : '+${qna.qnaName}"/>
+    </attr>
+    <attr sel="#btn1" th:onclick="|submitreply(${qna.qnaIdx})|"/>
+</thlogic>
